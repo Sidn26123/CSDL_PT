@@ -12,9 +12,10 @@ namespace NganHang_PhanTan
     static class Program
     {
         public static String computername = "TT-5CD7153J7H"; //thay lại tên lap
+        public static String dataS = computername;
         public static SqlConnection conn = new SqlConnection();
         public static String connectStr;
-        public static String connectStr_Pub = "Data Source="+computername+";Initial Catalog=NGANHANG;Integrated Security=True";
+        public static String connectStr_Pub = "Data Source="+ dataS + ";Initial Catalog=NGANHANG;Integrated Security=True";
         public static SqlDataAdapter da;
         public static SqlDataReader myReader;
         public static String servername;
@@ -26,7 +27,7 @@ namespace NganHang_PhanTan
         public static String password;
         public static String mlogin;
         public static String mpassword;
-        public static String username;
+        public static String username = "";
         public static String remoteLogin = "HTKN";
         public static String remotePassword = "2612";
         public static String database = "NGANHANG";
@@ -34,7 +35,9 @@ namespace NganHang_PhanTan
         public static String CN;
         public static int CNIndex;
         public static String mHoTen;
-
+        public static String[] dspmChiXem = new string[] { "Thông tin khách hàng" };
+        public static String[] idDataSource = new string[] { "BENTHANH", "TANDINH" };
+        public static String[] genderDS = new string[] { "Nam", "Nữ" };
 
         public static BindingSource dspmBdS = new BindingSource(); //chứa ds phân mảnh khi login
         public static frmMain frmChinh;
@@ -58,6 +61,19 @@ namespace NganHang_PhanTan
             }
         }
 
+        public static bool isLogin()
+        {
+            if (Program.conn == null)
+            {
+                return false;
+            }
+            if (mlogin != null && mlogin.Trim().Length != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public static SqlDataReader ExecSqlDataReader(String cmd)
         {
             SqlDataReader myreader;
@@ -67,7 +83,7 @@ namespace NganHang_PhanTan
             sqlcmd.Connection = Program.conn;
             sqlcmd.CommandText = cmd;
             sqlcmd.CommandType = CommandType.Text;
-
+            if (Program.conn.State == ConnectionState.Open) Program.conn.Close();
             if (Program.conn.State == ConnectionState.Closed) Program.conn.Open();
             try
             {
