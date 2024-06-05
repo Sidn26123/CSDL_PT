@@ -40,6 +40,7 @@ namespace NganHang_PhanTan.SubForm
 
                     System.Console.WriteLine(s.GetString(0));
                     */
+                    MessageUtil.ShowInfoMsgDialog("Chuyển nhân viên thành công");
                 }
             }
             catch (Exception ex)

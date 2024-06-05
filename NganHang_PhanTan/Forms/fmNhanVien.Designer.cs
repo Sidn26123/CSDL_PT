@@ -101,6 +101,8 @@ namespace NganHang_PhanTan
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             this.fillTeToolStrip = new System.Windows.Forms.ToolStrip();
             this.fillTeToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.fillByAToolStrip = new System.Windows.Forms.ToolStrip();
+            this.fillByAToolStripButton = new System.Windows.Forms.ToolStripButton();
             mANVLabel = new System.Windows.Forms.Label();
             dIACHILabel = new System.Windows.Forms.Label();
             trangThaiXoaLabel = new System.Windows.Forms.Label();
@@ -133,6 +135,7 @@ namespace NganHang_PhanTan
             ((System.ComponentModel.ISupportInitialize)(this.GD_CT_BdS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             this.fillTeToolStrip.SuspendLayout();
+            this.fillByAToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // mANVLabel
@@ -758,16 +761,19 @@ namespace NganHang_PhanTan
             // 
             // PhaiTextEdit
             // 
+            this.PhaiTextEdit.AllowDrop = true;
             this.PhaiTextEdit.DataBindings.Add(new System.Windows.Forms.Binding("EditValue", this.NV_BdS, "PHAI", true));
             this.PhaiTextEdit.EditValue = "Nam";
             this.PhaiTextEdit.Location = new System.Drawing.Point(432, 95);
             this.PhaiTextEdit.MenuManager = this.barManager1;
             this.PhaiTextEdit.Name = "PhaiTextEdit";
+            this.PhaiTextEdit.Properties.AllowDropDownWhenReadOnly = DevExpress.Utils.DefaultBoolean.True;
             this.PhaiTextEdit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.PhaiTextEdit.Properties.Items.AddRange(new object[] {
             "Nam",
             "Nữ"});
+            this.PhaiTextEdit.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
             this.PhaiTextEdit.Size = new System.Drawing.Size(69, 20);
             this.PhaiTextEdit.TabIndex = 27;
             // 
@@ -807,11 +813,30 @@ namespace NganHang_PhanTan
             this.fillTeToolStripButton.Text = "FillTe";
             this.fillTeToolStripButton.Click += new System.EventHandler(this.fillTeToolStripButton_Click);
             // 
+            // fillByAToolStrip
+            // 
+            this.fillByAToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fillByAToolStripButton});
+            this.fillByAToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.fillByAToolStrip.Name = "fillByAToolStrip";
+            this.fillByAToolStrip.Size = new System.Drawing.Size(111, 25);
+            this.fillByAToolStrip.TabIndex = 17;
+            this.fillByAToolStrip.Text = "fillByAToolStrip";
+            // 
+            // fillByAToolStripButton
+            // 
+            this.fillByAToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.fillByAToolStripButton.Name = "fillByAToolStripButton";
+            this.fillByAToolStripButton.Size = new System.Drawing.Size(47, 22);
+            this.fillByAToolStripButton.Text = "FillByA";
+            this.fillByAToolStripButton.Click += new System.EventHandler(this.fillByAToolStripButton_Click);
+            // 
             // fmNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(795, 515);
+            this.Controls.Add(this.fillByAToolStrip);
             this.Controls.Add(this.fillTeToolStrip);
             this.Controls.Add(this.panelControl2);
             this.Controls.Add(this.NVGridControll);
@@ -849,6 +874,8 @@ namespace NganHang_PhanTan
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             this.fillTeToolStrip.ResumeLayout(false);
             this.fillTeToolStrip.PerformLayout();
+            this.fillByAToolStrip.ResumeLayout(false);
+            this.fillByAToolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -916,5 +943,7 @@ namespace NganHang_PhanTan
         private System.Windows.Forms.CheckBox allowChuyenCNCheckbox;
         private System.Windows.Forms.ToolStrip fillTeToolStrip;
         private System.Windows.Forms.ToolStripButton fillTeToolStripButton;
+        private System.Windows.Forms.ToolStrip fillByAToolStrip;
+        private System.Windows.Forms.ToolStripButton fillByAToolStripButton;
     }
 }

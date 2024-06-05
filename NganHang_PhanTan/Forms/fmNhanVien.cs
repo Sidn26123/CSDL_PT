@@ -33,7 +33,10 @@ namespace NganHang_PhanTan
         {
             InitializeComponent();
         }
-
+        public void closeForm()
+        {
+            this.Dispose();
+        }
         private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
 
@@ -99,11 +102,6 @@ namespace NganHang_PhanTan
 
         }
 
-        private void testChange()
-        {
-            System.Console.WriteLine("changed");
-        }
-
         private void gridView1_CustomColumnDisplayText(object sender, CustomColumnDisplayTextEventArgs e)
         {
             GridView view = sender as GridView;
@@ -125,7 +123,6 @@ namespace NganHang_PhanTan
         {
 
         }
-
 
         private void addBtn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -170,14 +167,19 @@ namespace NganHang_PhanTan
 
             if (MessageUtil.ShowWarnConfirmDialog($"Xác nhận xóa nhân viên có mã số {manv}?") == DialogResult.OK)
             {
+
                 try
                 {
                     manv = ((DataRowView)NV_BdS[NV_BdS.Position])["MANV"].ToString();
                     nv = new NhanVien((DataRowView)NV_BdS[NV_BdS.Position]);
                     nv.MaNV = manv;
                     NV_BdS.RemoveCurrent();
-                    this.NhanVienTableAdapter.Connection.ConnectionString = Program.connectStr;
+                    //this.DS.NhanVien.AcceptChanges();
+
+                    //this.NhanVienTableAdapter.Connection.ConnectionString = Program.connectStr;
                     this.NhanVienTableAdapter.Update(this.DS.NhanVien);
+
+
                 }
                 catch (Exception ex)
                 {
@@ -252,107 +254,96 @@ namespace NganHang_PhanTan
             string manv = "";
             int gridPos = NV_BdS.Position;
             System.Console.WriteLine("type: " + lastAcionSaveBtn + " at: " + gridPos);
-            if (lastAcionSaveBtn == "update")
+            manv = MaNVTextBox.Text.Trim();
+            if (!nv.isMaNVValid(manv) && !string.IsNullOrEmpty(manv))
             {
-                nv = new NhanVien
-                {
-                    Ho = HoTextEdit.Text.Trim(),
-                    Ten = TenTextEdit.Text.Trim(),
-                    SoDT = SoDTTextEdit.Text.Trim(),
-                    Phai = PhaiTextEdit.Text,
-                    Cmnd = CMNDTextEdit.Text.Trim(),
-                    DiaChi = DiaChiTextEdit.Text.Trim(),
-                    MaNV = MaNVTextBox.Text.Trim(),
-                    TrangThaiXoa = trangThaiXoaCheckBox.Checked
-                };
+                MessageBox.Show("Mã NV không đúng định dạng! (NV + 0000-9999)", "", MessageBoxButtons.OK);
+                MaNVTextBox.Focus();
+                return;
             }
-            else if (lastAcionSaveBtn == "insert") //Nếu trạng thái là thêm
+            nv.MaNV = manv;
+            string honv = HoTextEdit.Text.Trim();
+            if (honv == "")
             {
-                manv = MaNVTextBox.Text.Trim();
-                if (!nv.isMaNVValid(manv) && !string.IsNullOrEmpty(manv))
-                {
-                    MessageBox.Show("Mã NV không đúng định dạng! (NV + 0000-9999)", "", MessageBoxButtons.OK);
-                    MaNVTextBox.Focus();
-                    return;
-                }
-                nv.MaNV = manv;
-                string honv = HoTextEdit.Text.Trim();
-                if (honv == "")
-                {
-                    MessageBox.Show("Họ không được để trống", "", MessageBoxButtons.OK);
-                    HoTextEdit.Focus();
-                    return;
-                }
-                else if (honv.Contains(" "))
-                {
-                    MessageBox.Show("Họ không hợp lệ", "", MessageBoxButtons.OK);
-                    HoTextEdit.Focus();
-                    return;
-                }
-                honv = NameFormatter.CapitalizeFirstLetter(NameFormatter.RemoveDuplicateSpace(HoTextEdit.Text.Trim()));
-                nv.Ho = honv;
-                string tennv = TenTextEdit.Text.Trim();
-                if (tennv == "")
-                {
-                    MessageBox.Show("Tên không được để trống", "", MessageBoxButtons.OK);
-                    TenTextEdit.Focus();
-                    return;
-                }
-                tennv = NameFormatter.CapitalizeFirstLetter(NameFormatter.RemoveDuplicateSpace(TenTextEdit.Text.Trim()));
-                nv.Ten = tennv;
-
-                string phai = PhaiTextEdit.Text.Trim();
-                if (phai == "")
-                {
-                    MessageBox.Show("Phái không được để trống", "", MessageBoxButtons.OK);
-                    PhaiTextEdit.Focus();
-                    return;
-                }
-                nv.Phai = PhaiTextEdit.Text.Trim();
-
-                string sdt = SoDTTextEdit.Text.Trim();
-
-                if ((sdt.Length < 9 || sdt.Length > 12) && sdt.Length > 0)
-                {
-                    MessageBox.Show("Số điện thoại phải có từ 9 đến 12 ký tự", "", MessageBoxButtons.OK);
-                    SoDTTextEdit.Focus();
-                    return;
-                }
-                else if (sdt.Length > 0 && !Regex.IsMatch(sdt, @"^\d+$"))
-                {
-                    MessageBox.Show("Số điện thoại chỉ được chứa các ký tự số", "", MessageBoxButtons.OK);
-                    SoDTTextEdit.Focus();
-                    return;
-                }
-                nv.SoDT = sdt;
-
-                string cmnd = CMNDTextEdit.Text.Trim();
-                if (cmnd == "")
-                {
-                    MessageBox.Show("CMND không được để trống", "", MessageBoxButtons.OK);
-                    CMNDTextEdit.Focus();
-                    return;
-                }
-                else if (cmnd.Length != 9 && cmnd.Length > 0)
-                {
-                    MessageBox.Show("CMND phải có 9 ký tự", "", MessageBoxButtons.OK);
-                    CMNDTextEdit.Focus();
-                    return;
-                }
-                else if (!Regex.IsMatch(cmnd, @"^\d+$"))
-                {
-                    MessageBox.Show("CMND chỉ được chứa các ký tự số", "", MessageBoxButtons.OK);
-                    CMNDTextEdit.Focus();
-                    return;
-                }
-                nv.Cmnd = cmnd;
-
-                nv.DiaChi = DiaChiTextEdit.Text.Trim();
-
-                nv.TrangThaiXoa = trangThaiXoaCheckBox.Checked;
-                //NV_BdS.RemoveCurrent();
-                //NV_BdS.AddNew();
+                MessageBox.Show("Họ không được để trống", "", MessageBoxButtons.OK);
+                HoTextEdit.Focus();
+                return;
             }
+            else if (!NameFormatter.IsPureChars(honv))
+            {
+                MessageBox.Show("Họ không hợp lệ", "", MessageBoxButtons.OK);
+                HoTextEdit.Focus();
+                return;
+            }
+
+            honv = NameFormatter.CapitalizeFirstLetter(NameFormatter.RemoveDuplicateSpace(HoTextEdit.Text.Trim()));
+            nv.Ho = honv;
+            string tennv = TenTextEdit.Text.Trim();
+            if (tennv == "")
+            {
+                MessageBox.Show("Tên không được để trống", "", MessageBoxButtons.OK);
+                TenTextEdit.Focus();
+                return;
+            }
+            else if (!NameFormatter.IsPureChars(tennv))
+            {
+                MessageBox.Show("Tên không được chứa số", "", MessageBoxButtons.OK);
+                TenTextEdit.Focus();
+                return;
+            }
+            tennv = NameFormatter.CapitalizeFirstLetter(NameFormatter.RemoveDuplicateSpace(TenTextEdit.Text.Trim()));
+            nv.Ten = tennv;
+
+            string phai = PhaiTextEdit.Text.Trim();
+            if (phai == "")
+            {
+                MessageBox.Show("Phái không được để trống", "", MessageBoxButtons.OK);
+                PhaiTextEdit.Focus();
+                return;
+            }
+            nv.Phai = PhaiTextEdit.Text.Trim();
+
+            string sdt = SoDTTextEdit.Text.Trim();
+
+            if ((sdt.Length < 9 || sdt.Length > 12) && sdt.Length > 0)
+            {
+                MessageBox.Show("Số điện thoại phải có từ 9 đến 12 ký tự", "", MessageBoxButtons.OK);
+                SoDTTextEdit.Focus();
+                return;
+            }
+            else if (sdt.Length > 0 && !Regex.IsMatch(sdt, @"^\d+$"))
+            {
+                MessageBox.Show("Số điện thoại chỉ được chứa các ký tự số", "", MessageBoxButtons.OK);
+                SoDTTextEdit.Focus();
+                return;
+            }
+            nv.SoDT = sdt;
+
+            string cmnd = CMNDTextEdit.Text.Trim();
+            if (cmnd == "")
+            {
+                MessageBox.Show("CMND không được để trống", "", MessageBoxButtons.OK);
+                CMNDTextEdit.Focus();
+                return;
+            }
+            else if (cmnd.Length != 9 && cmnd.Length > 0)
+            {
+                MessageBox.Show("CMND phải có 9 ký tự", "", MessageBoxButtons.OK);
+                CMNDTextEdit.Focus();
+                return;
+            }
+            else if (!Regex.IsMatch(cmnd, @"^\d+$"))
+            {
+                MessageBox.Show("CMND chỉ được chứa các ký tự số", "", MessageBoxButtons.OK);
+                CMNDTextEdit.Focus();
+                return;
+            }
+            nv.Cmnd = cmnd;
+
+            nv.DiaChi = DiaChiTextEdit.Text.Trim();
+
+            nv.TrangThaiXoa = trangThaiXoaCheckBox.Checked;
+             //NV_BdS.AddNew();
             //Nếu trong trạng thái insert thì cần lấy các thông tin từ phần nhập thông tin nv
 
             if (lastAcionSaveBtn == "insert")
@@ -761,6 +752,11 @@ namespace NganHang_PhanTan
 
         private void CNCombox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            System.Console.WriteLine("cahnge" + Program.username);
+            if (Program.username == "")
+            {
+                return;
+            }
             CNCombox.DataSource = Program.dspmBdS;
             CNCombox.DisplayMember = "TENCN";
             CNCombox.ValueMember = "TENSERVER";
@@ -770,6 +766,7 @@ namespace NganHang_PhanTan
             }
 
             Program.servername = CNCombox.SelectedValue.ToString();
+
             if (CNCombox.SelectedIndex != Program.CNIndex)
             {
                 Program.mlogin = Program.remoteLogin;
@@ -780,6 +777,7 @@ namespace NganHang_PhanTan
                 Program.mlogin = Program.login;
                 Program.mpassword = Program.password;
             }
+            System.Console.WriteLine(Program.connectStr);
 
             if (Program.KetNoi() == 0)
             {
@@ -1116,6 +1114,18 @@ namespace NganHang_PhanTan
 
         }
 
+        private void fillByAToolStripButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.NhanVienTableAdapter.FillByA(this.DS.NhanVien);
+            }
+            catch (System.Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+        }
     }
 
 }

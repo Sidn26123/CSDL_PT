@@ -34,10 +34,27 @@ namespace NganHang_PhanTan
 
         private void previewBtn_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(stkTxt.Text.Trim()) || string.IsNullOrEmpty(dateStartDE.Text.Trim()) || string.IsNullOrEmpty(dateEndDE.Text.Trim()))
+            {
+                MessageBox.Show("Vui lòng nhập thông tin đầy đủ!", "", MessageBoxButtons.OK);
+                return; // Nếu có trường nào thiếu thông tin, thoát khỏi phương thức
+            }
             string stk = stkTxt.Text.Trim();
-            string dateStart = dateStartDE.DateTime.Date.ToString("yyyy-MM-dd");
-            string dateEnd = dateEndDE.DateTime.Date.ToString("yyyy-MM-dd");
+            string dateStart = "";
+            string dateEnd = "";
+            try
+            {
+                 dateStart = dateStartDE.DateTime.Date.ToString("yyyy-MM-dd");
+                 dateEnd = dateEndDE.DateTime.Date.ToString("yyyy-MM-dd");
+            }
+            catch
+            {
+                MessageBox.Show("Vui lòng nhập đúng format!", "", MessageBoxButtons.OK);
+                return;
+            }
             DateTime dateEndDT = dateEndDE.DateTime;
+            System.Console.WriteLine("date: " + dateStart);
+
             XtraReport1 rpt = new XtraReport1(stk, dateStart, dateEnd);
 
             rpt.lbTieuDe.Text = "SAO KÊ TÀI KHOẢN " + stk + " TỪ " + dateStart +" ĐẾN " + dateEnd;
@@ -61,6 +78,10 @@ namespace NganHang_PhanTan
 
         private void stkTxt_Leave(object sender, EventArgs e)
         {
+            if (stkTxt.Text == "")
+            {
+                return;
+            }
             try
             {
                 if (stkTxt.Text.Trim().Length == 0)

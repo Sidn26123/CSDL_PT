@@ -18,7 +18,12 @@ namespace NganHang_PhanTan.Util
             // Chuyển đổi ký tự đầu tiên thành chữ in hoa
             return char.ToUpper(input[0]) + input.Substring(1);
         }
-
+        public static bool IsPureChars(string input)
+        {
+            // Sử dụng biểu thức chính quy để kiểm tra xem chuỗi chỉ chứa các ký tự chữ hay không
+            Regex regex = new Regex(@"^[a-zA-Z\sÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêễìíòóôõùúăđĩũơẮẰẴẶẤẦẪẬẾỀỄỆỐỒỖỘỚỜỠỢỨỪỮỰÝỲỸỴýỳỹỵ]+$");
+            return regex.IsMatch(input);
+        }
         public static string RemoveDuplicateSpace(string input)
         {
             if (string.IsNullOrEmpty(input))

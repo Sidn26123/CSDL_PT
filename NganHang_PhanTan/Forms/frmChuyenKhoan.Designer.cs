@@ -66,6 +66,7 @@ namespace NganHang_PhanTan
             // 
             this.sotienTextEdit.Location = new System.Drawing.Point(275, 204);
             this.sotienTextEdit.Name = "sotienTextEdit";
+            this.sotienTextEdit.Properties.EditFormat.FormatString = "#.###";
             this.sotienTextEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.sotienTextEdit.Properties.Mask.EditMask = "n0";
             this.sotienTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
@@ -98,6 +99,7 @@ namespace NganHang_PhanTan
             this.stkChuyenTextEdit.Name = "stkChuyenTextEdit";
             this.stkChuyenTextEdit.Size = new System.Drawing.Size(134, 20);
             this.stkChuyenTextEdit.TabIndex = 11;
+            this.stkChuyenTextEdit.EditValueChanged += new System.EventHandler(this.stkChuyenTextEdit_EditValueChanged);
             this.stkChuyenTextEdit.Leave += new System.EventHandler(this.stkChuyenTextEdit_Leave);
             // 
             // nameOfSTKDichTxt
@@ -123,6 +125,7 @@ namespace NganHang_PhanTan
             this.stkDichTextEdit.Name = "stkDichTextEdit";
             this.stkDichTextEdit.Size = new System.Drawing.Size(134, 20);
             this.stkDichTextEdit.TabIndex = 17;
+            this.stkDichTextEdit.EditValueChanged += new System.EventHandler(this.stkDichTextEdit_EditValueChanged);
             this.stkDichTextEdit.Leave += new System.EventHandler(this.stkDichTextEdit_Leave);
             // 
             // amountTKChuyenTxt

@@ -98,18 +98,27 @@ namespace NganHang_PhanTan
 
         private void updateTTKH()
         {
-            String ex = "EXEC SP_LayTTKH " + stkTextEdit.Text;
-            SqlDataReader dr = Program.ExecSqlDataReader(ex);
-            dr.Read();
-            nameOfSTKOwnerTxt.Text = dr.GetString(0);
-            String a = "";
-            if (!dr.IsDBNull(1))
+            try
             {
-                a = dr.GetDecimal(1).ToString("F0");
-                // Tiếp tục xử lý với giá trị của 'a' ở đây
+                String ex = "EXEC SP_LayTTKH " + stkTextEdit.Text;
+                SqlDataReader dr = Program.ExecSqlDataReader(ex);
+                dr.Read();
+                nameOfSTKOwnerTxt.Text = dr.GetString(0);
+                String a = "";
+                if (!dr.IsDBNull(1))
+                {
+                    a = dr.GetDecimal(1).ToString("F0");
+                    // Tiếp tục xử lý với giá trị của 'a' ở đây
+                }
+                amountMoneyTxt.Text = MoneyUtil.formatMoneyStr(a, ",");
+                dr.Close();
             }
-            amountMoneyTxt.Text = MoneyUtil.formatMoneyStr(a, ",");
-            dr.Close();
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("ex: " + ex.Message);
+                MessageUtil.ShowErrorMsgDialog("STK không hợp lệ hoặc không tồn tại");
+                stkTextEdit.Focus();
+            }
         }
     }
 }

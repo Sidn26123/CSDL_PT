@@ -39,6 +39,7 @@ namespace NganHang_PhanTan
             try
             {
                 conPub.ConnectionString = Program.connectStr_Pub;
+                System.Console.WriteLine("con");
                 conPub.Open();
                 return 1;
             }
@@ -84,6 +85,7 @@ namespace NganHang_PhanTan
 
         private void exitBtn_Click(object sender, EventArgs e)
         {
+            
             Close();
             Program.frmChinh.Close();
         }

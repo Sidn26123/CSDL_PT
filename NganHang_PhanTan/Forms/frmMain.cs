@@ -121,6 +121,7 @@ namespace NganHang_PhanTan
             {
                 if (Program.username != "")
                 {
+                    closeFormsWhenLogout();
                     Program.conn.Close();
                     Program.connectStr = "";
                     Program.username = "";
@@ -131,7 +132,7 @@ namespace NganHang_PhanTan
                     HOTEN.Text = "Họ tên: " + Program.mHoTen;
                     NHOM.Text = "Nhóm: " + Program.mGroup;
                     baoCaoRib.Visible = nghiepVuRib.Visible = false;
-                    
+
 
                     MessageBox.Show("Đăng xuất thành công", "", MessageBoxButtons.OK);
 
@@ -178,6 +179,19 @@ namespace NganHang_PhanTan
                 f.MdiParent = this;
                 f.Show();
             }
+        }
+
+        private void closeFormsWhenLogout()
+        {
+            Form frm = this.CheckExists(typeof(fmNhanVien));
+            if (frm != null) frm.Dispose();
+            Form frmGR = this.CheckExists(typeof(frmGoiRutTien));
+            if (frmGR != null) frmGR.Dispose();
+            Form frmCK = this.CheckExists(typeof(frmChuyenKhoan));
+            if (frmCK != null) frmCK.Dispose();
+            Form frmSK = this.CheckExists(typeof(frmRp_SaoKe));
+            if (frmSK != null) frmSK.Dispose();
+
         }
     }
 }

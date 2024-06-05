@@ -89,7 +89,9 @@ namespace NganHang_PhanTan
             }
             catch (Exception ex)
             {
-
+                System.Console.WriteLine(ex.Message);
+                MessageUtil.ShowErrorMsgDialog("STK không hợp lệ");
+                stkChuyenTextEdit.Focus();
             }
         }
 
@@ -100,17 +102,42 @@ namespace NganHang_PhanTan
 
         private void stkDichTextEdit_Leave(object sender, EventArgs e)
         {
-            String ex = "EXEC SP_LayTTKH " + stkDichTextEdit.Text;
-            SqlDataReader dr = Program.ExecSqlDataReader(ex);
-            dr.Read();
-            nameOfSTKDichTxt.Text = dr.GetString(0);
-            String a = "";
-            if (!dr.IsDBNull(1))
+            if (stkDichTextEdit.Text == "")
             {
-                a = dr.GetDecimal(1).ToString("F0");
-                // Tiếp tục xử lý với giá trị của 'a' ở đây
+                return;
             }
-            dr.Close();
+            try
+            {
+                String ex = "EXEC SP_LayTTKH " + stkDichTextEdit.Text;
+                SqlDataReader dr = Program.ExecSqlDataReader(ex);
+                dr.Read();
+                nameOfSTKDichTxt.Text = dr.GetString(0);
+                String a = "";
+                if (!dr.IsDBNull(1))
+                {
+                    System.Console.WriteLine("W");
+                    a = dr.GetDecimal(1).ToString("F0");
+                    // Tiếp tục xử lý với giá trị của 'a' ở đây
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+                MessageUtil.ShowErrorMsgDialog("STK không hợp lệ");
+                stkDichTextEdit.Focus();
+            }
+
+
+        }
+
+        private void stkChuyenTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void stkDichTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
 
         }
     }
