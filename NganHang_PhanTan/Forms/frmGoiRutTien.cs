@@ -28,8 +28,8 @@ namespace NganHang_PhanTan
         {
             try
             {
-                String stk = stkTextEdit.Text;
-                String sotien = soTienTextEdit.Text;
+                String stk = stkTextEdit.Text.Trim();
+                String sotien = soTienTextEdit.Text.Trim();
                 String loaiGD = "";
                 object selectedValue = loaiGDRadioGroup.EditValue;
                 if (selectedValue != null)
@@ -89,10 +89,20 @@ namespace NganHang_PhanTan
 
         private void stkTextEdit_Leave(object sender, EventArgs e)
         {
-            if (FormatValidator.isSTKInputValid(stkTextEdit.Text))
+            String stk = stkTextEdit.Text.Trim();
+            if (stk == "")
+            {
+                return;
+            }
+            if (FormatValidator.isSTKInputValid(stk))
             {
                 updateTTKH();
 
+            }
+            else
+            {
+                MessageUtil.ShowErrorMsgDialog("STK không hợp lệ");
+                stkTextEdit.Focus();
             }
         }
 
@@ -100,23 +110,31 @@ namespace NganHang_PhanTan
         {
             try
             {
+                /*
+                if (FormatValidator.isSTKInputValid(stkTextEdit.Text.Trim())){
+                    MessageUtil.ShowErrorMsgDialog("Số tài khoản không hợp lệ");
+                    stkTextEdit.Focus();
+                }
+                */
                 String ex = "EXEC SP_LayTTKH " + stkTextEdit.Text;
                 SqlDataReader dr = Program.ExecSqlDataReader(ex);
                 dr.Read();
-                nameOfSTKOwnerTxt.Text = dr.GetString(0);
-                String a = "";
+                String moneyTxt = "";
+                nameOfSTKOwnerTxt.Text = "";
+                amountMoneyTxt.Text = "";
                 if (!dr.IsDBNull(1))
                 {
-                    a = dr.GetDecimal(1).ToString("F0");
-                    // Tiếp tục xử lý với giá trị của 'a' ở đây
+                    nameOfSTKOwnerTxt.Text = dr.GetString(0);
+                    moneyTxt = dr.GetDecimal(1).ToString("F0");
+                    amountMoneyTxt.Text = MoneyUtil.formatMoneyStr(moneyTxt, ",");
+
                 }
-                amountMoneyTxt.Text = MoneyUtil.formatMoneyStr(a, ",");
                 dr.Close();
             }
             catch (Exception ex)
             {
                 System.Console.WriteLine("ex: " + ex.Message);
-                MessageUtil.ShowErrorMsgDialog("STK không hợp lệ hoặc không tồn tại");
+                MessageUtil.ShowErrorMsgDialog("STK không tồn tại");
                 stkTextEdit.Focus();
             }
         }

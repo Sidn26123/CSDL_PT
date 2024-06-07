@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NganHang_PhanTan.Report;
+using NganHang_PhanTan.Util;
 namespace NganHang_PhanTan
 {
 
@@ -78,21 +79,25 @@ namespace NganHang_PhanTan
 
         private void stkTxt_Leave(object sender, EventArgs e)
         {
-            if (stkTxt.Text == "")
+            String stk = stkTxt.Text.Trim();
+            if (stk == "")
             {
+                return;
+            }
+            else if ( !FormatValidator.isSTKInputValid(stk))
+            {
+                MessageUtil.ShowErrorMsgDialog("STK không hợp lệ (STK chỉ chứa số)");
+                stkTxt.Focus();
                 return;
             }
             try
             {
-                if (stkTxt.Text.Trim().Length == 0)
-                {
-                    MessageBox.Show("Stk không được để trống", "", MessageBoxButtons.OK);
-                    stkTxt.Focus();
-                    return;
-                }
+
                 string execStr = "EXEC SP_LayTTKH " + stkTxt.Text.Trim();
                 SqlDataReader dr = Program.ExecSqlDataReader(execStr);
                 dr.Read();
+                nameSTKTxt.Text = "";
+
                 if (dr.IsDBNull(0))
                 {
                     MessageBox.Show("Stk không tồn tại", "", MessageBoxButtons.OK);
@@ -101,12 +106,14 @@ namespace NganHang_PhanTan
                 }
                 nameSTKTxt.Text = dr.GetString(0);
                 hoten = dr.GetString(0);
+                /*
                 String a = "";
                 if (!dr.IsDBNull(1))
                 {
                     a = dr.GetDecimal(1).ToString("F0");
                     // Tiếp tục xử lý với giá trị của 'a' ở đây
                 }
+                */
                 dr.Close();
             }
             catch (Exception ex)

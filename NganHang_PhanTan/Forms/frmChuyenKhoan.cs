@@ -68,23 +68,38 @@ namespace NganHang_PhanTan
             amountTKChuyenTxt;
             nameOfSTKDichTxt
             */
-            if (stkChuyenTextEdit.Text == "")
+            String stk = stkChuyenTextEdit.Text.Trim();
+            if (stk == "")
             {
                 return;
+            }
+            else if (!FormatValidator.isSTKInputValid(stk))
+            {
+                MessageUtil.ShowErrorMsgDialog("Số tài khoản không hợp lệ (STK chỉ chứa số)");
+                stkDichTextEdit.Focus();
             }
 
             try
             {
-                String ex = "EXEC SP_LayTTKH " + stkChuyenTextEdit.Text;
+                String ex = "EXEC SP_LayTTKH " + stk;
                 SqlDataReader dr = Program.ExecSqlDataReader(ex);
                 dr.Read();
-                nameOfSTKOwnerTxt.Text = dr.GetString(0);
                 String a = "";
+                nameOfSTKOwnerTxt.Text = "";
+                amountTKChuyenTxt.Text = "";
+                if (dr.IsDBNull(0))
+                {
+                    MessageBox.Show("Stk không tồn tại", "", MessageBoxButtons.OK);
+                    stkDichTextEdit.Focus();
+                    return;
+                }
                 if (!dr.IsDBNull(1))
                 {
+                    nameOfSTKOwnerTxt.Text = dr.GetString(0);
                     a = dr.GetDecimal(1).ToString("F0");
+                    amountTKChuyenTxt.Text = MoneyUtil.formatMoneyStr(a, ",");
+
                 }
-                amountTKChuyenTxt.Text = MoneyUtil.formatMoneyStr(a, ",");
                 dr.Close();
             }
             catch (Exception ex)
@@ -102,12 +117,36 @@ namespace NganHang_PhanTan
 
         private void stkDichTextEdit_Leave(object sender, EventArgs e)
         {
-            if (stkDichTextEdit.Text == "")
+            String stk = stkDichTextEdit.Text.Trim();
+            if (stk == "")
             {
                 return;
             }
+            else if (!FormatValidator.isSTKInputValid(stk))
+            {
+                MessageUtil.ShowErrorMsgDialog("Số tài khoản không hợp lệ (STK chỉ chứa số)");
+                stkDichTextEdit.Focus();
+            }
             try
             {
+                String ex = "EXEC SP_LayTTKH " + stk;
+                SqlDataReader dr = Program.ExecSqlDataReader(ex);
+                dr.Read();
+                String a = "";
+                nameOfSTKDichTxt.Text = "";
+                if (dr.IsDBNull(0))
+                {
+                    MessageBox.Show("Stk không tồn tại", "", MessageBoxButtons.OK);
+                    
+                    stkDichTextEdit.Focus();
+                    return;
+                }
+                if (!dr.IsDBNull(1))
+                {
+                    nameOfSTKDichTxt.Text = dr.GetString(0);
+
+                }
+                /*
                 String ex = "EXEC SP_LayTTKH " + stkDichTextEdit.Text;
                 SqlDataReader dr = Program.ExecSqlDataReader(ex);
                 dr.Read();
@@ -115,16 +154,16 @@ namespace NganHang_PhanTan
                 String a = "";
                 if (!dr.IsDBNull(1))
                 {
-                    System.Console.WriteLine("W");
                     a = dr.GetDecimal(1).ToString("F0");
                     // Tiếp tục xử lý với giá trị của 'a' ở đây
                 }
                 dr.Close();
+                */
             }
             catch (Exception ex)
             {
                 System.Console.WriteLine(ex.Message);
-                MessageUtil.ShowErrorMsgDialog("STK không hợp lệ");
+                MessageUtil.ShowErrorMsgDialog("STK không tồn tại");
                 stkDichTextEdit.Focus();
             }
 
