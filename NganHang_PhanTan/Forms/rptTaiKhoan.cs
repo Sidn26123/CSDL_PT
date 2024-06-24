@@ -10,18 +10,15 @@ using System.Windows.Forms;
 
 namespace NganHang_PhanTan
 {
-    public partial class Form1 : Form
+    public partial class rptTaiKhoan : Form
     {
-        public Form1()
+        public rptTaiKhoan(string quyen, DateTime value)
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        public rptTaiKhoan(string quyen, DateTime value, DateTime value1) : this(quyen, value)
         {
-            // TODO: This line of code loads data into the 'dS.NhanVien' table. You can move, or remove it, as needed.
-            this.nhanVienTableAdapter.Fill(this.dS.NhanVien);
-
         }
     }
 }

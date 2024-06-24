@@ -71,22 +71,56 @@
     <Compile Include="Component\ActionData.cs" />
     <Compile Include="Component\ActionDataControl.cs" />
     <Compile Include="Component\NhanVien.cs" />
+    <Compile Include="DS.cs">
+      <DependentUpon>DS.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DS.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DS.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form1.cs">
+    <Compile Include="Forms\db_connect.cs" />
+    <Compile Include="Forms\fmKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\fmKhachHang.Designer.cs">
+      <DependentUpon>fmKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmMoTaiKhoanKH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmMoTaiKhoanKH.Designer.cs">
+      <DependentUpon>fmMoTaiKhoanKH.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmNhanVien.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\fmNhanVien.Designer.cs">
       <DependentUpon>fmNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmThongKe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmThongKe.Designer.cs">
+      <DependentUpon>fmThongKe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmThongKeKhachHang.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\fmThongKeKhachHang.Designer.cs">
+      <DependentUpon>fmThongKeKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmThongKeTaiKhoan.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\fmThongKeTaiKhoan.Designer.cs">
+      <DependentUpon>fmThongKeTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmThongKe_TK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmThongKe_TK.Designer.cs">
+      <DependentUpon>fmThongKe_TK.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmRp_SaoKe.cs">
       <SubType>Form</SubType>
@@ -118,6 +152,26 @@
     <Compile Include="Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmTaiKhoan.Designer.cs">
+      <DependentUpon>frmTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\KT_KhachHang.cs" />
+    <Compile Include="Forms\KT_TaiKhoanKH.cs" />
+    <Compile Include="Forms\rptKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\rptKhachHang.Designer.cs">
+      <DependentUpon>rptKhachHang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\rptTaiKhoan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\rptTaiKhoan.Designer.cs">
+      <DependentUpon>rptTaiKhoan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\Xrpt_SaoKe.cs">
@@ -148,11 +202,26 @@
       <DependentUpon>Xtrp_SaoKe.cs</DependentUpon>
     </Compile>
     <Compile Include="Util\NameFormatter.cs" />
+    <EmbeddedResource Include="Forms\fmKhachHang.resx">
+      <DependentUpon>fmKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmMoTaiKhoanKH.resx">
+      <DependentUpon>fmMoTaiKhoanKH.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmNhanVien.resx">
       <DependentUpon>fmNhanVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmThongKe.resx">
+      <DependentUpon>fmThongKe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmThongKeKhachHang.resx">
+      <DependentUpon>fmThongKeKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmThongKeTaiKhoan.resx">
+      <DependentUpon>fmThongKeTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmThongKe_TK.resx">
+      <DependentUpon>fmThongKe_TK.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmRp_SaoKe.resx">
       <DependentUpon>frmRp_SaoKe.cs</DependentUpon>
@@ -168,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmTaiKhoan.resx">
+      <DependentUpon>frmTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

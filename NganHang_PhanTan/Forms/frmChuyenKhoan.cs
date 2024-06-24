@@ -34,11 +34,23 @@ namespace NganHang_PhanTan
                     MessageBox.Show("Vui lòng nhập thông tin đầy đủ!", "", MessageBoxButtons.OK);
                     return;
                 }
+                else if (stkChuyen == stkDich)
+                {
+                    MessageBox.Show("Tài khoản trùng nhau!", "", MessageBoxButtons.OK);
+                    return;
+                }
+                String sqlStr = "";
+                try
+                {
+                    sqlStr = "EXEC SP_GDChuyenKhoan " + stkChuyen + ", " + stkDich + ", " + soTien + ", " + Program.username;
+                    Program.ExecSqlQuery(sqlStr, Program.connectStr);
+                }
+                catch(Exception xe)
+                {
+                    MessageUtil.ShowErrorMsgDialog(xe.Message);
+                    return;
+                }
 
-                String sqlStr = "EXEC SP_GDChuyenKhoan " + stkChuyen + ", " + stkDich + ", " + soTien + ", " + Program.username;
-                Program.ExecSqlQuery(sqlStr, Program.connectStr);
-
-                System.Console.WriteLine(sqlStr);
                 MessageBox.Show("Giao dịch thành công!", "", MessageBoxButtons.OK);
                 String ex = "EXEC SP_LayTTKH " + stkChuyenTextEdit.Text.Trim();
                 SqlDataReader dr = Program.ExecSqlDataReader(ex);
@@ -126,6 +138,7 @@ namespace NganHang_PhanTan
             {
                 MessageUtil.ShowErrorMsgDialog("Số tài khoản không hợp lệ (STK chỉ chứa số)");
                 stkDichTextEdit.Focus();
+                return;
             }
             try
             {

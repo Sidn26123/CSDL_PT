@@ -47,6 +47,7 @@ namespace NganHang_PhanTan
             this.chuyenTienBarActionBtn = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem7 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem8 = new DevExpress.XtraBars.BarButtonItem();
+            this.saoKeBarBtn = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.nghiepVuRib = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -60,7 +61,10 @@ namespace NganHang_PhanTan
             this.MANV = new System.Windows.Forms.ToolStripStatusLabel();
             this.HOTEN = new System.Windows.Forms.ToolStripStatusLabel();
             this.NHOM = new System.Windows.Forms.ToolStripStatusLabel();
-            this.saoKeBarBtn = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.managekh = new DevExpress.XtraBars.BarButtonItem();
+            this.btnThongKe = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.nghiepVuRibControll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -87,9 +91,11 @@ namespace NganHang_PhanTan
             this.chuyenTienBarActionBtn,
             this.barButtonItem7,
             this.barButtonItem8,
-            this.saoKeBarBtn});
+            this.saoKeBarBtn,
+            this.managekh,
+            this.btnThongKe});
             this.nghiepVuRibControll.Location = new System.Drawing.Point(0, 0);
-            this.nghiepVuRibControll.MaxItemId = 24;
+            this.nghiepVuRibControll.MaxItemId = 26;
             this.nghiepVuRibControll.Name = "nghiepVuRibControll";
             this.nghiepVuRibControll.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1,
@@ -148,6 +154,7 @@ namespace NganHang_PhanTan
             this.createAccountBarBtnItem.Id = 15;
             this.createAccountBarBtnItem.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("createAccountBarBtnItem.ImageOptions.Image")));
             this.createAccountBarBtnItem.Name = "createAccountBarBtnItem";
+            this.createAccountBarBtnItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.createAccountBarBtnItem_ItemClick);
             // 
             // logoutBarBtnItem
             // 
@@ -211,6 +218,15 @@ namespace NganHang_PhanTan
             this.barButtonItem8.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem8.ImageOptions.LargeImage")));
             this.barButtonItem8.Name = "barButtonItem8";
             // 
+            // saoKeBarBtn
+            // 
+            this.saoKeBarBtn.Caption = "Sao kê";
+            this.saoKeBarBtn.Id = 23;
+            this.saoKeBarBtn.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("saoKeBarBtn.ImageOptions.Image")));
+            this.saoKeBarBtn.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("saoKeBarBtn.ImageOptions.LargeImage")));
+            this.saoKeBarBtn.Name = "saoKeBarBtn";
+            this.saoKeBarBtn.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.saoKeBarBtn_ItemClick);
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -230,7 +246,9 @@ namespace NganHang_PhanTan
             this.nghiepVuRib.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup3,
             this.ribbonPageGroup5,
-            this.ribbonPageGroup6});
+            this.ribbonPageGroup6,
+            this.ribbonPageGroup2,
+            this.ribbonPageGroup7});
             this.nghiepVuRib.Name = "nghiepVuRib";
             this.nghiepVuRib.Text = "Nghiệp vụ";
             // 
@@ -301,14 +319,31 @@ namespace NganHang_PhanTan
             this.NHOM.Text = "NHOM";
             this.NHOM.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
             // 
-            // saoKeBarBtn
+            // ribbonPageGroup2
             // 
-            this.saoKeBarBtn.Caption = "Sao kê";
-            this.saoKeBarBtn.Id = 23;
-            this.saoKeBarBtn.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem6.ImageOptions.Image")));
-            this.saoKeBarBtn.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem6.ImageOptions.LargeImage")));
-            this.saoKeBarBtn.Name = "saoKeBarBtn";
-            this.saoKeBarBtn.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.saoKeBarBtn_ItemClick);
+            this.ribbonPageGroup2.ItemLinks.Add(this.managekh);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Text = "ribbonPageGroup2";
+            // 
+            // ribbonPageGroup7
+            // 
+            this.ribbonPageGroup7.ItemLinks.Add(this.btnThongKe);
+            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
+            this.ribbonPageGroup7.Text = "ribbonPageGroup7";
+            // 
+            // managekh
+            // 
+            this.managekh.Caption = "barButtonItem6";
+            this.managekh.Id = 24;
+            this.managekh.Name = "managekh";
+            this.managekh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.managekh_ItemClick);
+            // 
+            // btnThongKe
+            // 
+            this.btnThongKe.Caption = "barButtonItem6";
+            this.btnThongKe.Id = 25;
+            this.btnThongKe.Name = "btnThongKe";
+            this.btnThongKe.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThongKe_ItemClick);
             // 
             // frmMain
             // 
@@ -364,6 +399,10 @@ namespace NganHang_PhanTan
         private DevExpress.XtraBars.BarButtonItem barButtonItem7;
         private DevExpress.XtraBars.BarButtonItem barButtonItem8;
         private DevExpress.XtraBars.BarButtonItem saoKeBarBtn;
+        private DevExpress.XtraBars.BarButtonItem managekh;
+        private DevExpress.XtraBars.BarButtonItem btnThongKe;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
     }
 }
 

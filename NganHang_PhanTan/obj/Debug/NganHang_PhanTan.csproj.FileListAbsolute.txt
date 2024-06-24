@@ -195,3 +195,10 @@ C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug
 C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug\NganHang_PhanTan.Xtrp_SaoKe.resources
 C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug\NganHang_PhanTan.Report.Xrpt_SaoKe.resources
 C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug\NganHang_PhanTan.Report.XtraReport1.resources
+C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug\NganHang_PhanTan.frmTaiKhoan.resources
+C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug\NganHang_PhanTan.fmKhachHang.resources
+C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug\NganHang_PhanTan.fmMoTaiKhoanKH.resources
+C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug\NganHang_PhanTan.fmThongKe.resources
+C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug\NganHang_PhanTan.fmThongKeKhachHang.resources
+C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug\NganHang_PhanTan.fmThongKeTaiKhoan.resources
+C:\Users\HP ProBook 440\source\repos\NganHang_PhanTan\NganHang_PhanTan\obj\Debug\NganHang_PhanTan.fmThongKe_TK.resources

@@ -145,6 +145,7 @@ namespace NganHang_PhanTan
 
         private void deleteBtn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+
             String manv = ((DataRowView)NV_BdS[NV_BdS.Position])["MaNV"].ToString().Trim();
             NhanVien nv = new NhanVien();
 
@@ -152,6 +153,7 @@ namespace NganHang_PhanTan
             {
                 MessageUtil.ShowErrorMsgDialog("Không thể tự xóa bản thân.");
                 return;
+
             }
             if (GD_GR_BdS.Count > 0)
             {
@@ -253,7 +255,6 @@ namespace NganHang_PhanTan
             NhanVien nv = new NhanVien();
             string manv = "";
             int gridPos = NV_BdS.Position;
-            System.Console.WriteLine("type: " + lastAcionSaveBtn + " at: " + gridPos);
             manv = MaNVTextBox.Text.Trim();
             if (!nv.isMaNVValid(manv) && !string.IsNullOrEmpty(manv))
             {
@@ -353,7 +354,7 @@ namespace NganHang_PhanTan
                     NV_BdS.EndEdit();
                     NV_BdS.ResetCurrentItem();
 
-                    this.NhanVienTableAdapter.Connection.ConnectionString = Program.connectStr;
+                    //this.NhanVienTableAdapter.Connection.ConnectionString = Program.connectStr;
                     if (string.IsNullOrEmpty(nv.MaNV))
                     {
 
@@ -427,7 +428,10 @@ namespace NganHang_PhanTan
             else if (lastAcionSaveBtn == "update")
             {
                 try
+
                 {
+                   // this.NhanVienTableAdapter.Connection.ConnectionString = Program.connectStr;
+
                     NV_BdS.EndEdit();
                     // Đặt thông tin nhân viên mới lên grid control
                     NV_BdS.ResetCurrentItem();
@@ -460,7 +464,6 @@ namespace NganHang_PhanTan
             if (lastAcionSaveBtn == "insert")
             {
                 action.Type = ActionData.EventType.DELETE;
-                System.Console.WriteLine(action.Type);
                 action.Content = nv;
 
             }
@@ -599,7 +602,6 @@ namespace NganHang_PhanTan
         {
             if (undoStack.Count > 0)
             {
-                printUndoStack();
                 ActionData action = undoStack.Last();
                 undoStack.RemoveLast();
                 //System.Console.Write("undo type: " + action.Type + " - " );
@@ -608,7 +610,7 @@ namespace NganHang_PhanTan
                     case ActionData.EventType.CANCEL_EDIT:
                         {
                             int res = execEditingAction(action);
-                            if (res == 0)
+                            if (res == 1)
                             {
                                 action.Type = ActionData.EventType.DELETE;
                                 NV_BdS.Position = action.PositionInGird;
@@ -683,6 +685,8 @@ namespace NganHang_PhanTan
                 redoBtn.Enabled = (redoStack.Count > 0);
             }
             undoBtn.Enabled = (undoStack.Count > 0);
+            System.Console.WriteLine("redo stack-------");
+            printRedoStack();
         }
         private void redoBtn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -752,7 +756,6 @@ namespace NganHang_PhanTan
 
         private void CNCombox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            System.Console.WriteLine("cahnge" + Program.username);
             if (Program.username == "")
             {
                 return;
@@ -777,7 +780,6 @@ namespace NganHang_PhanTan
                 Program.mlogin = Program.login;
                 Program.mpassword = Program.password;
             }
-            System.Console.WriteLine(Program.connectStr);
 
             if (Program.KetNoi() == 0)
             {
@@ -1108,7 +1110,7 @@ namespace NganHang_PhanTan
             {
                 NhanVien a = (NhanVien)actionData.Content;
                 Console.WriteLine("Type: " + actionData.Type);
-                Console.WriteLine(" MaNV: " + a.MaNV);
+                Console.WriteLine("MaNV: " + a.MaNV);
                 Console.WriteLine("----------------------------------");
             }
 
@@ -1118,7 +1120,7 @@ namespace NganHang_PhanTan
         {
             try
             {
-                this.NhanVienTableAdapter.FillByA(this.DS.NhanVien);
+                this.NhanVienTableAdapter.FillBy(this.DS.NhanVien);
             }
             catch (System.Exception ex)
             {

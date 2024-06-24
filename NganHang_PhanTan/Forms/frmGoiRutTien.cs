@@ -29,7 +29,7 @@ namespace NganHang_PhanTan
             try
             {
                 String stk = stkTextEdit.Text.Trim();
-                String sotien = soTienTextEdit.Text.Trim();
+                String sotien = soTienTextEdit.EditValue.ToString().Trim(); //Nếu lấy như bt thì sẽ có dấu ,  => lỗi nhiều argemunt
                 String loaiGD = "";
                 object selectedValue = loaiGDRadioGroup.EditValue;
                 if (selectedValue != null)

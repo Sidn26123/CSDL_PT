@@ -54,7 +54,13 @@ namespace NganHang_PhanTan
                 return;
             }
             DateTime dateEndDT = dateEndDE.DateTime;
-            System.Console.WriteLine("date: " + dateStart);
+            DateTime dateStartDT = dateStartDE.DateTime;
+
+            if (dateStartDT > dateEndDT)
+            {
+                MessageBox.Show("Ngày bắt đầu không thể lớn hơn ngày kết thúc!", "", MessageBoxButtons.OK);
+                return;
+            }
 
             XtraReport1 rpt = new XtraReport1(stk, dateStart, dateEnd);
 

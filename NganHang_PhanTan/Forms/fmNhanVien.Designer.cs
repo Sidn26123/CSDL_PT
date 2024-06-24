@@ -817,9 +817,9 @@ namespace NganHang_PhanTan
             // 
             this.fillByAToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fillByAToolStripButton});
-            this.fillByAToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.fillByAToolStrip.Location = new System.Drawing.Point(0, 278);
             this.fillByAToolStrip.Name = "fillByAToolStrip";
-            this.fillByAToolStrip.Size = new System.Drawing.Size(111, 25);
+            this.fillByAToolStrip.Size = new System.Drawing.Size(795, 25);
             this.fillByAToolStrip.TabIndex = 17;
             this.fillByAToolStrip.Text = "fillByAToolStrip";
             // 

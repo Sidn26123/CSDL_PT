@@ -35,14 +35,14 @@ namespace NganHang_PhanTan
             this.label1 = new System.Windows.Forms.Label();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
-            this.backBarActionBtn = new DevExpress.XtraBars.BarButtonItem();
-            this.nextBarActionBtn = new DevExpress.XtraBars.BarButtonItem();
             this.bar2 = new DevExpress.XtraBars.Bar();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            this.backBarActionBtn = new DevExpress.XtraBars.BarButtonItem();
+            this.nextBarActionBtn = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControl1 = new DevExpress.XtraBars.BarDockControl();
             this.label2 = new System.Windows.Forms.Label();
             this.soTienTextEdit = new DevExpress.XtraEditors.TextEdit();
@@ -102,22 +102,6 @@ namespace NganHang_PhanTan
             this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
             this.bar1.Text = "Tools";
             // 
-            // backBarActionBtn
-            // 
-            this.backBarActionBtn.Caption = "Quay lại";
-            this.backBarActionBtn.Id = 0;
-            this.backBarActionBtn.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("backBarActionBtn.ImageOptions.Image")));
-            this.backBarActionBtn.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("backBarActionBtn.ImageOptions.LargeImage")));
-            this.backBarActionBtn.Name = "backBarActionBtn";
-            // 
-            // nextBarActionBtn
-            // 
-            this.nextBarActionBtn.Caption = "barButtonItem1";
-            this.nextBarActionBtn.Id = 1;
-            this.nextBarActionBtn.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("nextBarActionBtn.ImageOptions.Image")));
-            this.nextBarActionBtn.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("nextBarActionBtn.ImageOptions.LargeImage")));
-            this.nextBarActionBtn.Name = "nextBarActionBtn";
-            // 
             // bar2
             // 
             this.bar2.BarName = "Main menu";
@@ -172,6 +156,22 @@ namespace NganHang_PhanTan
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 342);
             // 
+            // backBarActionBtn
+            // 
+            this.backBarActionBtn.Caption = "Quay lại";
+            this.backBarActionBtn.Id = 0;
+            this.backBarActionBtn.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("backBarActionBtn.ImageOptions.Image")));
+            this.backBarActionBtn.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("backBarActionBtn.ImageOptions.LargeImage")));
+            this.backBarActionBtn.Name = "backBarActionBtn";
+            // 
+            // nextBarActionBtn
+            // 
+            this.nextBarActionBtn.Caption = "barButtonItem1";
+            this.nextBarActionBtn.Id = 1;
+            this.nextBarActionBtn.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("nextBarActionBtn.ImageOptions.Image")));
+            this.nextBarActionBtn.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("nextBarActionBtn.ImageOptions.LargeImage")));
+            this.nextBarActionBtn.Name = "nextBarActionBtn";
+            // 
             // barDockControl1
             // 
             this.barDockControl1.CausesValidation = false;
@@ -197,6 +197,7 @@ namespace NganHang_PhanTan
             this.soTienTextEdit.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
             this.soTienTextEdit.Properties.Mask.EditMask = "n0";
             this.soTienTextEdit.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.soTienTextEdit.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.soTienTextEdit.Size = new System.Drawing.Size(134, 20);
             this.soTienTextEdit.TabIndex = 8;
             this.soTienTextEdit.EditValueChanged += new System.EventHandler(this.soTienTextEdit_EditValueChanged);

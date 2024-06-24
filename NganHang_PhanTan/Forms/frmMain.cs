@@ -76,10 +76,13 @@ namespace NganHang_PhanTan
             MANV.Text = "Mã NV: " + Program.username;
             HOTEN.Text = "Họ tên: " + Program.mHoTen;
             NHOM.Text = "Nhóm: " + Program.mGroup;
+            createAccountBarBtnItem.Enabled = true;
             if (Program.mGroup == "KhachHang")
             {
                 nghiepVuRib.Visible = false;
                 createAccountBarBtnItem.Enabled = false;
+                createAccountBarBtnItem.Enabled = false;
+
             }
             else if (Program.mGroup == "NganHang")
             {
@@ -192,6 +195,42 @@ namespace NganHang_PhanTan
             Form frmSK = this.CheckExists(typeof(frmRp_SaoKe));
             if (frmSK != null) frmSK.Dispose();
 
+        }
+
+        private void createAccountBarBtnItem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(frmTaiKhoan));
+            if (frm != null) frm.Activate();
+            else
+            {
+                frmTaiKhoan f = new frmTaiKhoan();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void managekh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(fmKhachHang));
+            if (frm != null) frm.Activate();
+            else
+            {
+                fmKhachHang f = new fmKhachHang();
+                f.MdiParent = this;
+                f.Show();
+            }
+        }
+
+        private void btnThongKe_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Form frm = this.CheckExists(typeof(fmThongKe));
+            if (frm != null) frm.Activate();
+            else
+            {
+                fmThongKe f = new fmThongKe();
+                f.MdiParent = this;
+                f.Show();
+            }
         }
     }
 }
